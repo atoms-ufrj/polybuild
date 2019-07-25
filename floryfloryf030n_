@@ -1,0 +1,236 @@
+===================================================================================================
+
+====================  ARQUIVOS DE CONFIGURAÇÕES PARA USO DO integ_playmol_pdi  ====================
+
+===================================================================================================
+
+[Anotações]
+
+
+
+[ Flags para construção dos arquivos de input ]
+Playmol        = yes         # (yes or no)
+Manter_xyzfile = yes         # (yes or no)
+Lammps         = yes         # (yes or no)
+Sq_file        = yes         # (yes or no)
+
+
+[Microestrutura]
+A 10 B 10 1
+A 10 B 5 1
+A 10 B 8 1
+A 11 B 10 1
+A 1 B 1 3
+A 1 B 10 59
+A 1 B 11 40
+A 1 B 12 15
+A 1 B 13 13
+A 1 B 14 5
+A 1 B 15 4
+A 1 B 16 1
+A 1 B 17 2
+A 1 B 18 1
+A 1 B 2 13
+A 1 B 3 52
+A 1 B 4 76
+A 1 B 5 99
+A 1 B 6 128
+A 1 B 7 125
+A 1 B 8 107
+A 1 B 9 94
+A 2 2
+A 2 B 1 5
+A 2 B 10 73
+A 2 B 11 53
+A 2 B 12 35
+A 2 B 13 9
+A 2 B 14 8
+A 2 B 15 2
+A 2 B 16 2
+A 2 B 2 25
+A 2 B 3 64
+A 2 B 4 104
+A 2 B 5 174
+A 2 B 6 186
+A 2 B 7 170
+A 2 B 8 153
+A 2 B 9 116
+A 3 B 1 14
+A 3 B 10 73
+A 3 B 11 50
+A 3 B 12 34
+A 3 B 13 22
+A 3 B 14 12
+A 3 B 15 3
+A 3 B 16 1
+A 3 B 17 1
+A 3 B 2 30
+A 3 B 3 49
+A 3 B 4 105
+A 3 B 5 127
+A 3 B 6 166
+A 3 B 7 155
+A 3 B 8 156
+A 3 B 9 112
+A 4 1
+A 4 B 1 3
+A 4 B 10 61
+A 4 B 11 34
+A 4 B 12 18
+A 4 B 13 7
+A 4 B 14 4
+A 4 B 15 3
+A 4 B 16 1
+A 4 B 2 18
+A 4 B 3 41
+A 4 B 4 78
+A 4 B 5 96
+A 4 B 6 111
+A 4 B 7 118
+A 4 B 8 108
+A 4 B 9 81
+A 5 B 1 4
+A 5 B 10 37
+A 5 B 11 22
+A 5 B 12 12
+A 5 B 13 9
+A 5 B 14 3
+A 5 B 15 2
+A 5 B 16 2
+A 5 B 2 9
+A 5 B 3 18
+A 5 B 4 34
+A 5 B 5 60
+A 5 B 6 57
+A 5 B 7 76
+A 5 B 8 51
+A 5 B 9 46
+A 6 B 1 1
+A 6 B 10 13
+A 6 B 11 7
+A 6 B 12 6
+A 6 B 13 4
+A 6 B 14 1
+A 6 B 15 1
+A 6 B 2 5
+A 6 B 3 16
+A 6 B 4 18
+A 6 B 5 25
+A 6 B 6 38
+A 6 B 7 38
+A 6 B 8 15
+A 6 B 9 20
+A 7 B 10 10
+A 7 B 11 3
+A 7 B 12 1
+A 7 B 2 2
+A 7 B 3 4
+A 7 B 4 9
+A 7 B 5 13
+A 7 B 6 8
+A 7 B 7 14
+A 7 B 8 14
+A 7 B 9 6
+A 8 B 10 3
+A 8 B 11 1
+A 8 B 12 1
+A 8 B 13 2
+A 8 B 2 2
+A 8 B 3 1
+A 8 B 4 5
+A 8 B 5 3
+A 8 B 6 6
+A 8 B 7 3
+A 8 B 8 3
+A 9 B 10 1
+A 9 B 11 1
+A 9 B 12 1
+A 9 B 2 1
+A 9 B 5 2
+A 9 B 8 3
+
+
+[Lista de componentes do sistema e suas massas]
+1 A 1.0
+2 B 1.0
+
+
+[Coeficiente de interação entre pares a_ij]
+1  1  25.0 
+1  2  ${a_11}+3.27*${qui}
+2  2  25.0
+
+
+[ Definição das variáveis do sistema a ser simulado ]
+ro                   = 3                           # densidade numérica da caixa de simulação
+lx                   = 25                          # dimensão x da caixa de simulação
+ly                   = 25                          # dimensão y da caixa de simulação
+lz                   = 25                          # dimensão z da caixa de simulação
+r_bond               = 0.4                         # distância inicial entre átomos ligados
+k_spring             = 2.0                         # constante elástica do potencial de ligação química 
+xeq_spring           = 0.0                         # distância de equilíbrio do potencial de ligação química
+                                                   
+                                                   
+[ Definição dos parâmetros Playmol ]               
+seed                 = 54389                       # semente para o gerador de números aleatórios do Playmol
+tol                  = 0.40                        # tolerância na distância entre moléculas
+retry_value          = 0.95                        # fator multiplicativo para tolerância
+
+
+[ Parâmetros para simulação DPD (LAMMPS) ]
+dimension            = 3                           # dimensão da simulação
+atom_style           = full                        # atom_style 
+units                = lj                          # parâmetro do comando units 
+                                          
+dt                   = 0.03                        # tamanho do passo de tempo 
+steps                = 9500000                     # quantidade de passos de tempo simulados
+steps_final          = 500000
+
+qui                  = 4.58                        # qui (X) fator de mistura
+#a_ii                = 25.0                        # coeficiente de interação ii soft DPD
+#a_ij                = ${a_ii}+3.27*${qui}         # coeficiente de interação ij soft DPD
+
+bondstyle            = harmonic                    # modelo de ligação química
+
+Temp                 = 1.0                         # temperatura da simulação
+r_cut                = 1.0                         # raio de corte DPD
+gamma                = 6.73                        # parâmetro gamma (relacionado ao termostatus)
+
+steps_random         = 50000                        # quantidade de passos na randomização
+steps_restart        = ceil(${steps}/10)           # quantidade de passos para escrita de arquivos de restart
+
+seed1                = 87654                       # uma semente para o gerador de números aleatórios
+seed2                = 34728                       # outra semente para o gerador de números aleatórios
+
+special_bonds_x      = 1.0                         # special bonds - x
+special_bonds_y      = 1.0                         # special bonds - y
+special_bonds_z      = 1.0                         # special bonds - z
+                                   
+comm_modify_cutoff   = 5.0                         # cutoff do comando comm_modify
+neighbor_bin         = 0.5                         # tamanho do skin no comando   
+neigh_modify_every   = 1                           # valor do parâmetro every do comando neigh_modify
+neigh_modify_delay   = 0                           # valor do parâmetro delay do comando neigh_modify
+neigh_modify_cluster = yes                         # valor do parâmetro cluster do comando neigh_modify 
+
+freq_ppm             = 1000000                     # criar imagens .ppm para em n passos de tempo
+freq_lammpstrj       = 10000                       # intervalo em passos de tempos entre os frames no arquivo lammpstrj
+freq_thermo          = 5000                        # escrita das informações termodinâmicas a cada n passos
+
+#group typeA type 1
+#group typeB type 2
+
+
+[ Parâmetros para cálculo do fator de estrutura S(q) ]
+
+inputfile_format                   = 1             # formato do arquivo de trajetória - 0 para xyz 1 para lammpstrj
+partial_Sq                         = true          # true para cálculo de S(q) parcial e false para S(q) global.
+number_of_components_to_Sq         = 1             # numbers of components to S(q) calculation 
+name_of_components                 = 1             # name of components to partial structure factor calculation
+number_of_equilibrations           = 0             # number of equilibrations
+number_of_configurations_to_sample = 50            # number of configurations to be sampled
+wave_vector_x_dimension            = 25            # number of wave vector for x dimension
+wave_vector_y_dimension            = 25            # number of wave vector for x dimension
+wave_vector_z_dimension            = 25            # number of wave vector for x dimension
+tolerance                          = 0.001         # tolerance on sampler os S(q) and q
+
+

@@ -1,168 +1,308 @@
 ===================================================================================================
 
-====================  ARQUIVOS DE CONFIGURAÇÕES PARA USO DO integ_playmol_pdi  ====================
+==============================  INPUT FILE TEMPLATE - polybuild.sh  ===============================
 
 ===================================================================================================
 
-[Anotações]
+[Annotations]
+This is a template of an input file to be processed by the shell script 'polybuild.sh'.
+The microstructure is of a diblock-type copolymer system in which both blocks have a truncated 
+Flory size distribution of size 24 (FLORY, 1953, PEEBLES JR., 1971).
+The average size of the chains is 10. The sample composition is 30% in component A, so the average 
+block size of component A is 3 and component B is 7.
+
+References: 
+- FLORY, P. J., 1953, Principles of Polymer Chemistry, Ithaca, Cornell University Press.
+- PEEBLES JR., L. H., 1971, Molecular Weight Distributions in Polymers, 1a ed., 
+    New York, John Wiley & Sons Inc.
 
 
-
-
-[Microestrutura]
-A 10 B 10 1
-A 10 B 5 1
+[Microstructure]
+A 10 B 1 4
+A 10 B 10 2
+A 10 B 11 1
+A 10 B 13 1
+A 10 B 16 1
+A 10 B 18 1
+A 10 B 19 1
+A 10 B 2 4
+A 10 B 20 1
+A 10 B 3 5
+A 10 B 4 4
+A 10 B 5 6
+A 10 B 6 3
+A 10 B 7 4
 A 10 B 8 1
-A 11 B 10 1
-A 1 B 1 3
-A 1 B 10 59
-A 1 B 11 40
-A 1 B 12 15
-A 1 B 13 13
-A 1 B 14 5
-A 1 B 15 4
-A 1 B 16 1
-A 1 B 17 2
-A 1 B 18 1
-A 1 B 2 13
-A 1 B 3 52
-A 1 B 4 76
-A 1 B 5 99
-A 1 B 6 128
-A 1 B 7 125
-A 1 B 8 107
-A 1 B 9 94
-A 2 2
-A 2 B 1 5
-A 2 B 10 73
-A 2 B 11 53
-A 2 B 12 35
-A 2 B 13 9
-A 2 B 14 8
-A 2 B 15 2
-A 2 B 16 2
-A 2 B 2 25
-A 2 B 3 64
-A 2 B 4 104
-A 2 B 5 174
-A 2 B 6 186
-A 2 B 7 170
-A 2 B 8 153
-A 2 B 9 116
-A 3 B 1 14
-A 3 B 10 73
-A 3 B 11 50
-A 3 B 12 34
-A 3 B 13 22
-A 3 B 14 12
-A 3 B 15 3
-A 3 B 16 1
-A 3 B 17 1
-A 3 B 2 30
-A 3 B 3 49
-A 3 B 4 105
-A 3 B 5 127
-A 3 B 6 166
-A 3 B 7 155
-A 3 B 8 156
-A 3 B 9 112
-A 4 1
-A 4 B 1 3
-A 4 B 10 61
-A 4 B 11 34
-A 4 B 12 18
-A 4 B 13 7
-A 4 B 14 4
-A 4 B 15 3
-A 4 B 16 1
-A 4 B 2 18
-A 4 B 3 41
-A 4 B 4 78
-A 4 B 5 96
-A 4 B 6 111
-A 4 B 7 118
-A 4 B 8 108
-A 4 B 9 81
-A 5 B 1 4
-A 5 B 10 37
-A 5 B 11 22
-A 5 B 12 12
-A 5 B 13 9
-A 5 B 14 3
-A 5 B 15 2
-A 5 B 16 2
-A 5 B 2 9
-A 5 B 3 18
-A 5 B 4 34
-A 5 B 5 60
-A 5 B 6 57
-A 5 B 7 76
-A 5 B 8 51
-A 5 B 9 46
-A 6 B 1 1
-A 6 B 10 13
-A 6 B 11 7
-A 6 B 12 6
-A 6 B 13 4
-A 6 B 14 1
-A 6 B 15 1
-A 6 B 2 5
-A 6 B 3 16
-A 6 B 4 18
-A 6 B 5 25
-A 6 B 6 38
-A 6 B 7 38
-A 6 B 8 15
-A 6 B 9 20
-A 7 B 10 10
-A 7 B 11 3
-A 7 B 12 1
-A 7 B 2 2
-A 7 B 3 4
-A 7 B 4 9
-A 7 B 5 13
-A 7 B 6 8
-A 7 B 7 14
-A 7 B 8 14
+A 10 B 9 2
+A 11 B 1 3
+A 11 B 10 2
+A 11 B 11 2
+A 11 B 13 2
+A 11 B 14 1
+A 11 B 16 1
+A 11 B 18 1
+A 11 B 2 3
+A 11 B 20 1
+A 11 B 3 4
+A 11 B 5 2
+A 11 B 6 2
+A 11 B 7 2
+A 11 B 9 1
+A 12 B 1 2
+A 12 B 10 3
+A 12 B 12 1
+A 12 B 15 1
+A 12 B 17 1
+A 12 B 2 2
+A 12 B 24 1
+A 12 B 3 1
+A 12 B 4 2
+A 12 B 5 2
+A 12 B 7 1
+A 12 B 8 1
+A 13 B 11 1
+A 13 B 13 1
+A 13 B 14 1
+A 13 B 2 5
+A 13 B 3 1
+A 13 B 5 2
+A 13 B 6 1
+A 14 B 1 4
+A 14 B 2 1
+A 14 B 22 1
+A 14 B 3 1
+A 14 B 9 1
+A 15 B 13 1
+A 15 B 3 1
+A 15 B 6 1
+A 15 B 8 1
+A 15 B 9 1
+A 16 B 18 1
+A 16 B 2 1
+A 16 B 23 1
+A 16 B 5 1
+A 17 B 3 1
+A 17 B 7 1
+A 18 B 1 1
+A 18 B 5 1
+A 19 B 1 1
+A 1 B 1 208
+A 1 B 10 76
+A 1 B 11 55
+A 1 B 12 48
+A 1 B 13 47
+A 1 B 14 33
+A 1 B 15 35
+A 1 B 16 26
+A 1 B 17 19
+A 1 B 18 26
+A 1 B 19 21
+A 1 B 2 175
+A 1 B 20 17
+A 1 B 21 22
+A 1 B 22 15
+A 1 B 23 6
+A 1 B 24 7
+A 1 B 3 152
+A 1 B 4 126
+A 1 B 5 117
+A 1 B 6 90
+A 1 B 7 94
+A 1 B 8 76
+A 1 B 9 71
+A 20 B 3 1
+A 2 B 1 137
+A 2 B 10 38
+A 2 B 11 34
+A 2 B 12 28
+A 2 B 13 26
+A 2 B 14 26
+A 2 B 15 23
+A 2 B 16 21
+A 2 B 17 18
+A 2 B 18 13
+A 2 B 19 16
+A 2 B 2 111
+A 2 B 20 7
+A 2 B 21 5
+A 2 B 22 8
+A 2 B 23 5
+A 2 B 24 7
+A 2 B 3 111
+A 2 B 4 107
+A 2 B 5 64
+A 2 B 6 79
+A 2 B 7 61
+A 2 B 8 59
+A 2 B 9 37
+A 3 B 1 89
+A 3 B 10 23
+A 3 B 11 26
+A 3 B 12 24
+A 3 B 13 10
+A 3 B 14 21
+A 3 B 15 11
+A 3 B 16 15
+A 3 B 17 12
+A 3 B 18 7
+A 3 B 19 6
+A 3 B 2 78
+A 3 B 20 8
+A 3 B 21 10
+A 3 B 22 6
+A 3 B 23 6
+A 3 B 24 6
+A 3 B 3 65
+A 3 B 4 55
+A 3 B 5 50
+A 3 B 6 53
+A 3 B 7 45
+A 3 B 8 37
+A 3 B 9 31
+A 4 B 1 54
+A 4 B 10 18
+A 4 B 11 11
+A 4 B 12 14
+A 4 B 13 18
+A 4 B 14 2
+A 4 B 15 10
+A 4 B 16 6
+A 4 B 17 8
+A 4 B 18 7
+A 4 B 19 4
+A 4 B 2 49
+A 4 B 20 6
+A 4 B 21 4
+A 4 B 22 6
+A 4 B 23 7
+A 4 B 24 5
+A 4 B 3 40
+A 4 B 4 47
+A 4 B 5 57
+A 4 B 6 31
+A 4 B 7 15
+A 4 B 8 16
+A 4 B 9 28
+A 5 B 1 38
+A 5 B 10 11
+A 5 B 11 15
+A 5 B 12 11
+A 5 B 13 7
+A 5 B 14 11
+A 5 B 15 4
+A 5 B 16 6
+A 5 B 17 7
+A 5 B 18 2
+A 5 B 19 4
+A 5 B 2 36
+A 5 B 20 6
+A 5 B 23 6
+A 5 B 3 26
+A 5 B 4 26
+A 5 B 5 18
+A 5 B 6 19
+A 5 B 7 27
+A 5 B 8 14
+A 5 B 9 15
+A 6 B 1 31
+A 6 B 10 3
+A 6 B 11 6
+A 6 B 12 7
+A 6 B 13 5
+A 6 B 14 4
+A 6 B 15 9
+A 6 B 16 3
+A 6 B 17 4
+A 6 B 18 3
+A 6 B 19 2
+A 6 B 2 31
+A 6 B 20 2
+A 6 B 24 1
+A 6 B 3 25
+A 6 B 4 12
+A 6 B 5 15
+A 6 B 6 14
+A 6 B 7 11
+A 6 B 8 10
+A 6 B 9 8
+A 7 B 1 19
+A 7 B 10 2
+A 7 B 11 4
+A 7 B 12 3
+A 7 B 13 2
+A 7 B 14 4
+A 7 B 15 2
+A 7 B 16 2
+A 7 B 17 1
+A 7 B 18 1
+A 7 B 19 2
+A 7 B 2 17
+A 7 B 20 1
+A 7 B 3 13
+A 7 B 4 14
+A 7 B 5 15
+A 7 B 6 11
+A 7 B 7 9
+A 7 B 8 9
 A 7 B 9 6
-A 8 B 10 3
-A 8 B 11 1
-A 8 B 12 1
-A 8 B 13 2
-A 8 B 2 2
-A 8 B 3 1
-A 8 B 4 5
-A 8 B 5 3
-A 8 B 6 6
-A 8 B 7 3
-A 8 B 8 3
-A 9 B 10 1
-A 9 B 11 1
-A 9 B 12 1
-A 9 B 2 1
-A 9 B 5 2
-A 9 B 8 3
+A 8 B 1 13
+A 8 B 10 1
+A 8 B 11 3
+A 8 B 12 3
+A 8 B 13 1
+A 8 B 14 4
+A 8 B 16 2
+A 8 B 17 1
+A 8 B 2 14
+A 8 B 21 2
+A 8 B 22 1
+A 8 B 23 1
+A 8 B 24 1
+A 8 B 3 9
+A 8 B 4 7
+A 8 B 5 6
+A 8 B 6 4
+A 8 B 7 2
+A 8 B 8 11
+A 8 B 9 6
+A 9 B 1 5
+A 9 B 10 5
+A 9 B 11 3
+A 9 B 12 2
+A 9 B 14 1
+A 9 B 17 1
+A 9 B 18 1
+A 9 B 2 6
+A 9 B 23 1
+A 9 B 24 1
+A 9 B 3 10
+A 9 B 4 9
+A 9 B 5 1
+A 9 B 6 5
+A 9 B 7 2
+A 9 B 8 5
+A 9 B 9 3
+B 13 2
+B 3 1
+B 5 1
 
-
-[Lista de componentes do sistema e suas massas]
+[ List of components and their masses ]
 1 A 1.0
 2 B 1.0
 
 
-[ Definição das variáveis do sistema a ser simulado ]
-ro                   = 3                           # densidade numérica da caixa de simulação
-lx                   = 25                          # dimensão x da caixa de simulação
-ly                   = 25                          # dimensão y da caixa de simulação
-lz                   = 25                          # dimensão z da caixa de simulação
-r_bond               = 0.4                         # distância inicial entre átomos ligados
-k_spring             = 2.0                         # constante elástica do potencial de ligação química 
-xeq_spring           = 0.0                         # distância de equilíbrio do potencial de ligação química
+[ Definition of system parameters to be packed ]
+ro                   = 3                           # numeric density of simulation box
+lx                   = 25                          # x-dimension x of simulation box
+ly                   = 25                          # y-dimension x of simulation box
+lz                   = 25                          # z-dimension x of simulation box
+r_bond               = 0.4                         # initial distance between bonded atoms
+k_spring             = 2.0                         # elastic constant of chemical bonding potential
+xeq_spring           = 0.0                         # equilibrium distance of chemical bonding potential
                                                    
                                                    
-[ Definição dos parâmetros Playmol ]               
-seed                 = 54389                       # semente para o gerador de números aleatórios do Playmol
-tol                  = 0.40                        # tolerância na distância entre moléculas
-retry_value          = 0.95                        # fator multiplicativo para tolerância
-
-
+[ Setting Playmol Parameters for Packing ] 
+seed                 = 54389                       # seed for Playmol random number generator
+tol                  = 0.40                        # tolerance on distance between molecules
+retry_value          = 0.95                        # multiplicative factor for tolerance
 

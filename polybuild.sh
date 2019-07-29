@@ -1,69 +1,59 @@
 #!/bin/bash
-
 #=========================================================================================================
-# Programa que escreve um arquivo de input, a ser lido pelo Playmol, com as coordenadas
-# de um sistema polimérico polidisperso.
-
-# Desenvolvido por Tiago S. M. Lemos - PEQ/COPPE/UFRJ
-# Rio de Janeiro - RJ, 1º de outubro de 2016
+# polybuild
+#      Program that receives an input file with information from a dispersed linear 
+#      architecture polymeric microstructure and writes an input file to be processed 
+#      by Playmol to package the microstructure generating an initial configuration
+#      for use in molecular dynamics simulations.
 #
-# Edições - incluída a possibilidade de novos componentes (misturas)
-#   Versão 0.1 - 05/10/2016
-#   o arquivo com a distribuição tem a seguinte estrutura:
-#   nome do componente tamanho de cadeia (1 para moléculas não oligoméricas quantidade
-
-#   Versão 0.2 - 06/10/2016
-#   Escrita do arquivo Lammps, para a simulação do sistema gerado
-#   Possibilidade de escrita de copolímeros dibloco
-
-#   Versão 1.0 - 16/10/2016
-#   Substituição do tipo de input: ao invés de somente a microestrura, o input agora 
-#   contém as informações sobre todos os parâmetros relevantes à simulação
-
+# Developed by Tiago S. M. Lemos
+#      Programa de Engenharia Química/COPPE
+#      Universidade Federal do Rio de Janeiro – CP: 69502
+#      Cidade Universitária, Rio de Janeiro, RJ, 21941-972, Brazil
+#      e-mail: tsmlemos@hotmail.com.br
+# 
+# Rio de Janeiro - October 1, 2016
+#========================================================================================================
+#
+# If this script is used in the preparation of scientific publications, the following paper should be cited:
+#
+# LEMOS, T. S. M., ABREU, C. R. A., PINTO, J. C. 
+# Mesoscopic Simulation of Dispersed Copolymers - Effects of Chain Length, Chemical
+#    Composition, and Block Length Distributions on Self-Assembly
+# Macromolecular Theory and Simulations, 2019
+#
 #========================================================================================================
 
 
-# Nome dos arquivos de entrada (Distribuição de Tamanhos de Cadeias - CLD) e de saída (input Playmol):
+# Recognize the input file:
 
 for ParameterFile in $*
 do
-
-echo "arquivo de configuração ${ParameterFile} sendo processado pelo polybuild"
-
-
-# Crie um diretório para incluir os resultados e mova para lá os arquivos necessários a execução do programa:
-
-prefixo=$(echo "${ParameterFile}" | cut -d. -f 1)
-if ! test -d "${prefixo}_results"; then
-  mkdir "${prefixo}_results"
-fi
-cp ${ParameterFile} "${prefixo}_results"
-cd "${prefixo}_results"
+echo "polybuild is processing the \"${ParameterFile}\" input file"
 cp ${ParameterFile} parameterfile.backup
-
-
-# Remova os espaços em branco repetidos e as linhas em branco do arquivo de estrutura:
-
 sed 's/[ ]\+/ /g ; /^ *\?$/d' parameterfile.backup > ${ParameterFile}
+prefixo=$(echo "${ParameterFile}" | cut -d. -f 1)
 
 
+#========================================================================================================
+# Define the output files names:
+
+InputPlaymolFile="${prefixo}.mol"                  # Playmol input file name
+xyz_file="${prefixo}.xyz"                          # xyz file name
+lammpstrj_read_file="${prefixo}.lammpstrj"         # Lammps trajectory file name
+lammps_data_file="data.${prefixo}.lmp"             # name of data file to generate for Lammps simulation
 
 
-# Defina os nomes dos arquivos de saída:
-
-InputPlaymolFile="${prefixo}.mol"                  # nome do arquivo de input a ser lido pelo Playmol
-xyz_file="${prefixo}.xyz"                          # nome do arquivo xyz a ser gerado
-vmd_read_file="${prefixo}.lammpstrj"               # nome do arquivo passível de visualização por VMD
-lammps_data_file="data.${prefixo}.lmp"             # nome do arquivo de dados gerado para a simulação Lammps 
-
-
-# Definição das variáveis do sistema a ser simulado:
+#========================================================================================================
+# Store the parameter values for the system to be simulated:
 
 k_spring=$(            grep -E "^k_spring "               ${ParameterFile}  | cut -d " " -f 3)
 xeq_spring=$(          grep -E "^xeq_spring "             ${ParameterFile}  | cut -d " " -f 3)
 
 
-# Definição dos parâmetros Playmol:                                                                  
+#========================================================================================================
+# Store Playmol packing parameters:
+
 ro=$(                  grep -E "^ro "                   ${ParameterFile}  | cut -d " " -f 3)
 r_bond=$(              grep -E "^r_bond "               ${ParameterFile}  | cut -d " " -f 3)
 seed=$(                grep -E "^seed "                 ${ParameterFile}  | cut -d " " -f 3)
@@ -71,26 +61,30 @@ tol=$(                 grep -E "^tol "                  ${ParameterFile}  | cut 
 retry_value=$(         grep -E "^retry_value "          ${ParameterFile}  | cut -d " " -f 3)
                                                                                                                
 
-# Reconhecimento dos tipos de átomos e criação de uma lista com seus nomes:
-init_micro=$(($(    grep -E -n "Microestrutura"           ${ParameterFile}  | cut -d ":" -f 1)+1))
-final_micro=$(($(   grep -E -n "Lista de componentes"     ${ParameterFile}  | cut -d ":" -f 1)-1)) 
-init_compmass=$(($( grep -E -n "Lista de componentes"     ${ParameterFile}  | cut -d ":" -f 1)+1)) 
-final_compmass=$(($(grep -E -n "Coeficiente de interação" ${ParameterFile}  | cut -d ":" -f 1)-1)) 
+#========================================================================================================
+# Recognize the types of atoms/beads and make a list with their names:
+
+init_micro=$(($(    grep -E -n "Microstructure"                  ${ParameterFile}  | cut -d ":" -f 1)+1))
+final_micro=$(($(   grep -E -n "List of components"              ${ParameterFile}  | cut -d ":" -f 1)-1)) 
+init_compmass=$(($( grep -E -n "List of components"              ${ParameterFile}  | cut -d ":" -f 1)+1)) 
+final_compmass=$(($(grep -E -n "Definition of system parameters" ${ParameterFile}  | cut -d ":" -f 1)-1)) 
 
 sed -n ${init_micro},${final_micro}p        ${ParameterFile} > structure.tmp
 sed -n ${init_compmass},${final_compmass}p  ${ParameterFile} > components.tmp
 
-# Escrita de informações iniciais dos inputs Playmol:
 
-echo -e "**********Escrevendo input para o Playmol********** \n. \n.. \n... "
-echo "# Arquivo gerado a partir do script 'inp_play_homopdi'
-# data de criação: $(date) 
+#========================================================================================================
+# Write the Playmol input file:
+
+echo -e "**********Writing input for Playmol********** \n. \n.. \n... "
+echo "# File generated from 'polybuild' script
+# creation date: $(date) 
 
   "  > ${InputPlaymolFile}
 
-while read id tipo massa; do
-  echo "atom_type       ${tipo} 
-mass            ${tipo}       ${massa}"  >> ${InputPlaymolFile}
+while read id type mass; do
+  echo "atom_type       ${type} 
+mass            ${type}       ${mass}"  >> ${InputPlaymolFile}
 done < components.tmp
 rm components.tmp
 
@@ -100,7 +94,7 @@ bond_type       *   *   ${k_spring} ${xeq_spring}
 "  >> ${InputPlaymolFile}
 
 
-# Leitura do arquivo com as informações da CLD e escrita do arquivo xyz:
+# Read the microstructure and generate a configuration file in xyz format:
 
 atom_count=1
 molecule_count=1
@@ -108,25 +102,24 @@ molecule_count=1
 > ${xyz_file}
 while read line; do
 
-  echo "# molécula  ${molecule_count} " >> ${InputPlaymolFile}
+  echo "# molecule  ${molecule_count} " >> ${InputPlaymolFile}
   n_words="$(echo "${line}" | wc -w)"
 
-  quantidade="$(echo "${line}" | cut -d " " -f ${n_words})"
-  echo "# N${molecule_count} =  ${quantidade}" >> ${InputPlaymolFile}
-  echo "packmol    copy ${molecule_count}  ${quantidade} " >> file1.tmp
+  quantity="$(echo "${line}" | cut -d " " -f ${n_words})"
+  echo "# N${molecule_count} =  ${quantity}" >> ${InputPlaymolFile}
+  echo "packmol    copy ${molecule_count}  ${quantity} " >> file1.tmp
   molecule_count=$((${molecule_count}+1))
 
   atom_init=${atom_count}
   x_atom=0.000 
 
   for n in $(seq 1 2 $((${n_words}-1))) ; do
-    tipo="$(echo "${line}" | cut -d " " -f ${n})"
-    tamanho_bloco="$(echo "${line}" | cut -d " " -f $((${n}+1)))"
+    type="$(echo "${line}" | cut -d " " -f ${n})"
+    block_size="$(echo "${line}" | cut -d " " -f $((${n}+1)))"
 
-    for n2 in $(seq 1 ${tamanho_bloco}); do 
-      echo "atom     ${atom_count}    ${tipo}" >> ${InputPlaymolFile}
+    for n2 in $(seq 1 ${block_size}); do 
+      echo "atom     ${atom_count}    ${type}" >> ${InputPlaymolFile}
       echo "${atom_count}      ${x_atom}    0.000    0.000" >> ${xyz_file}
-      # variavel=$(echo "expressão" | bc)            # expressão para uso do bc
       x_atom=$(echo " scale=3; ${x_atom}+${r_bond}" | bc)
       atom_count=$((${atom_count}+1))
     done
@@ -145,7 +138,7 @@ rm structure.tmp
 
 cp ${xyz_file} xyzfile.temp
 sed -e "1i $((${atom_count}-1))" -e \
-       "1i # arquivo com as coordenadas xyz gerado a partir do script inp_play_homopdi" xyzfile.temp > ${xyz_file}
+       "1i # file with xyz coordinates generated from polybuild script" xyzfile.temp > ${xyz_file}
 rm xyzfile.temp
 
 echo "build    ${xyz_file}
@@ -157,17 +150,14 @@ rm file1.tmp
 echo "packmol  action execute
 
 write    lammps ${lammps_data_file} 
-write    lammpstrj ${vmd_read_file}   " >> ${InputPlaymolFile}
-echo -e  "**********Concluído**********\n"
+write    lammpstrj ${lammpstrj_read_file}   " >> ${InputPlaymolFile}
+echo -e  "**********Completed**********\n"
+#========================================================================================================
 
 
-
-
-
-# recuperando a forma do arquivo de entrada:
+# Restore input file format:
 mv parameterfile.backup ${ParameterFile}
-
-cd ../
+#========================================================================================================
 done
 
-echo "================SCRIPT PROCESSADO ATÉ O FINAL================"
+

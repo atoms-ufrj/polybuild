@@ -11,7 +11,7 @@ configurations for molecular dynamics simulations of dispersed polymers.
 
 From a concise specification of the microstructure of a linear architecture dispersed 
 polymeric system, the quantities of different molecules in the simulated sample and the 
-parameters referring to the simulation box, the polymer builder (polybuild) creates the 
+parameters referring to the simulation box, the polybuild creates the 
 configuration files, called xyz files, containing the positions of all particles for all 
 molecular types in the sample. After that, it creates a file in a format recognized by 
 the software Playmol[1] that packs the molecules in a simulation box with all the required 
@@ -46,13 +46,11 @@ the information about angles and dihedrals.
 
 ### Criteria
 
-The concise writing of microstructures of all chains demands a code that can represent single 
-molecules or polymer chains with any architecture. Here a coding system is proposed for linear 
-chains, since this is the scope of the simulations of the present article. Each block is 
-represented by two pieces of information: the first one specifies the type of particle that 
-constitutes the block and the second represents the block length, which must necessarily be a 
-cardinal number. For example, A5B5 represents a diblock-type oligomer, consisting of a block with 
-five beads of type A attached to a block with five beads of type B.
+Here a coding system is proposed for linear chains. Each block is represented by two pieces of 
+information: the first one specifies the type of particle that constitutes the block and the 
+second represents the block length, which must necessarily be a cardinal number. For example, 
+'A 5 B 5' represents a diblock-type oligomer, consisting of a block with five beads of type A 
+attached to a block with five beads of type B.
 This coding is a representation of the structural formula of the molecule, so that it encloses all 
 compositional information and the connectivity between the component particles of the molecule. 
 However, it does not carry any conformational information, which is also necessary for the 
@@ -68,7 +66,7 @@ one, forming a connecting angle of 180º.
 
 ### How to use polybuild? 
 The use is quite straightforward. The *'polybuild.sh'* script receives an input file that contains 
-the microstructure specifications, system parameters, and Playmol parameters to be used for packaging - 
+the microstructure specifications, system parameters, and Playmol parameters to be used for packing - 
 see the template file called *'input_file_template'*.
 
 The command that processes the script has the following syntax and is capable of receiving multiple input files at once:

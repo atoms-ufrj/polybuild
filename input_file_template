@@ -293,9 +293,9 @@ B 5 1
 
 [ Definition of system parameters to be packed ]
 ro                   = 3                           # numeric density of simulation box
-lx                   = 25                          # x-dimension x of simulation box
-ly                   = 25                          # y-dimension x of simulation box
-lz                   = 25                          # z-dimension x of simulation box
+lx                   = 25                          # x-dimension of simulation box
+ly                   = 25                          # y-dimension of simulation box
+lz                   = 25                          # z-dimension of simulation box
 r_bond               = 0.4                         # initial distance between bonded atoms
 k_spring             = 2.0                         # elastic constant of chemical bonding potential
 xeq_spring           = 0.0                         # equilibrium distance of chemical bonding potential

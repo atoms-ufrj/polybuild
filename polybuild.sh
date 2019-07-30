@@ -14,17 +14,13 @@
 # 
 # Rio de Janeiro - October 1, 2016
 #========================================================================================================
-#
 # If this script is used in the preparation of scientific publications, the following paper should be cited:
 #
 # LEMOS, T. S. M., ABREU, C. R. A., PINTO, J. C. 
 # Mesoscopic Simulation of Dispersed Copolymers - Effects of Chain Length, Chemical
 #    Composition, and Block Length Distributions on Self-Assembly
 # Macromolecular Theory and Simulations, 2019
-#
 #========================================================================================================
-
-
 # Recognize the input file:
 
 for ParameterFile in $*
@@ -32,16 +28,16 @@ do
 echo "polybuild is processing the \"${ParameterFile}\" input file"
 cp ${ParameterFile} parameterfile.backup
 sed 's/[ ]\+/ /g ; /^ *\?$/d' parameterfile.backup > ${ParameterFile}
-prefixo=$(echo "${ParameterFile}" | cut -d. -f 1)
+prefix=$(echo "${ParameterFile}" | cut -d. -f 1)
 
 
 #========================================================================================================
 # Define the output files names:
 
-InputPlaymolFile="${prefixo}.mol"                  # Playmol input file name
-xyz_file="${prefixo}.xyz"                          # xyz file name
-lammpstrj_read_file="${prefixo}.lammpstrj"         # Lammps trajectory file name
-lammps_data_file="data.${prefixo}.lmp"             # name of data file to generate for Lammps simulation
+InputPlaymolFile="${prefix}.mol"                  # Playmol input file name
+xyz_file="${prefix}.xyz"                          # xyz file name
+lammpstrj_read_file="${prefix}.lammpstrj"         # Lammps trajectory file name
+lammps_data_file="data.${prefix}.lmp"             # name of data file to generate for Lammps simulation
 
 
 #========================================================================================================
@@ -152,11 +148,13 @@ echo "packmol  action execute
 write    lammps ${lammps_data_file} 
 write    lammpstrj ${lammpstrj_read_file}   " >> ${InputPlaymolFile}
 echo -e  "**********Completed**********\n"
+
+
 #========================================================================================================
-
-
 # Restore input file format:
 mv parameterfile.backup ${ParameterFile}
+
+
 #========================================================================================================
 done
 

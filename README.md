@@ -7,40 +7,36 @@ language, interpreted by GNU bash (version 4.3.30), which facilitates building i
 configurations for molecular dynamics simulations of dispersed polymers.
 
 
-### What does polybuild do?
+### What does Polybuild do?
 
-From a concise specification of the microstructure of a linear architecture dispersed 
-polymeric system, the quantities of different molecules in the simulated sample and the 
-parameters referring to the simulation box, the polybuild creates the 
+Based on the concise specification of the microstructure of a linear architecture dispersed 
+polymer system, the quantities of different molecules in the simulated sample and the 
+parameters related to the simulation box, Polybuild creates the 
 configuration files, called xyz files, containing the positions of all particles for all 
 molecular types in the sample. After that, it creates a file in a format recognized by 
-the software Playmol[1] that packs the molecules in a simulation box with all the required 
+the software Playmol[1], which packs the molecules in a simulation box with all the required 
 description.
 
 
-### Why polybuild is useful?
+### Why is Polybuild useful?
 
 Particle-based simulations require an initial configuration, which consists in the 
 initial positions of all particles of the simulated system. The task of creating such 
 initial conditions may not be trivial. It consists of an optimization problem with several 
-constraints, such as box size and shape restrictions, reproduction of the system density, 
-and the most difficult one, which is that short-range repulsions are not excessively large, 
-thus resulting in numerical instability during the course of the simulation.[2,3]
+constraints, such as: *(i)* box size and shape restrictions, *(ii)* reproduction of the system density, 
+and *(iii)* the most difficult one, as short-range repulsions should not br excessively large, 
+to prevent in numerical instability during the course of the simulation.[2,3]
 It is a common practice to use computer programs that solve this optimization problem by 
-packing the particles in simulation boxes subject to the constraints that force fields 
+packing the particles in simulation boxes that are subject to the constraints that force fields 
 impose.[4] 
 Generally, these programs create an initial configuration by replicating atoms and molecules 
 that make up the system in a defined region of space, respecting a series of spatial constraints, 
 thus creating complex initial configurations. 
-However, the number of different species in a dispersed polymer system can be in the order of 
-thousands. This requires, therefore, the description of the topology of these thousands of 
+However, the number of different species in a dispersed polymer system can be in the order of many
+thousands. This requires, therefore, the description of the topology of these many thousands of 
 chains. Even if the simulation reproduces only a small portion of space or if it involves a 
-coarse-grained model, obtaining such information and feeding it to computer programs that 
-generate initial configurations can be costly. For example, some simulations performed in 
-the present study have about 300 oligomeric chains that differ in size or composition, and 
-the definitions of the particles, chemical bonds and topology necessary to generate initial 
-configurations occupy, for each system, about of 13000 lines of code, even without considering 
-the information about angles and dihedrals.
+coarse-grained models, obtaining such information and feeding it to computer programs that 
+generate initial configurations can be costly. 
 
 
 
@@ -56,7 +52,7 @@ compositional information and the connectivity between the component particles o
 However, it does not carry any conformational information, which is also necessary for the 
 specification of the molecule to be replicated. Therefore, in addition to the sequence that 
 translates the structural information, it is necessary to specify conformational parameters for 
-writing the xyz files. The simplest choice is adopted, with the particles inserted to form a straight 
+writing the xyz files. The simplest choice is adopted, assuming that insertes particles form a straight 
 line in a given cartesian direction. Thus, each particle is inserted at a distance lb from the previous 
 one, forming a connecting angle of 180º.
 
@@ -64,9 +60,9 @@ one, forming a connecting angle of 180º.
 - Playmol - see reference [1].
 - a bash interpreter (the version provided here is tested for a GNU bash version 4.3.30).
 
-### How to use polybuild? 
-The use is quite straightforward. The *'polybuild.sh'* script receives an input file that contains 
-the microstructure specifications, system parameters, and Playmol parameters to be used for packing - 
+### How cam do use Polybuild? 
+The use is straightforward. The *'polybuild.sh'* script receives an input file that contains 
+the microstructural specifications, system parameters, that must and Playmol parameters to be used for packing - 
 see the template file called *'input_file_template'*.
 
 The command that processes the script has the following syntax and is capable of receiving multiple input files at once:
@@ -86,7 +82,7 @@ Mesoscopic Simulation of Dispersed Copolymers - Effects of Chain Length, Chemica
 
 
 &nbsp;
-[1]	Playmol, http://atoms.peq.coppe.ufrj.br/playmol.
+[1]	C. R. Abreu, "Playmol", http://atoms.peq.coppe.ufrj.br/playmol.
 
 
 &nbsp;

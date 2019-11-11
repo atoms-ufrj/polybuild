@@ -60,7 +60,7 @@ one, forming a connecting angle of 180º.
 - Playmol - see reference [1].
 - a bash interpreter (the version provided here is tested for a GNU bash version 4.3.30).
 
-### How cam do use Polybuild? 
+### How can do use Polybuild? 
 The use is straightforward. The *'polybuild.sh'* script receives an input file that contains 
 the microstructural specifications, system parameters, that must and Playmol parameters to be used for packing - 
 see the template file called *'input_file_template'*.
